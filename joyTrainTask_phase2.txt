@@ -1,0 +1,5 @@
+Condition	Frequency	Block	Timing File	TaskObject#1	TaskObject#2	
+1	1	1	joyTrainTask_phase2	fix(10,10)	fix(10,10)
+2	1	1	joyTrainTask_phase2	fix(-10,10)	fix(-10,10)
+3	1	1	joyTrainTask_phase2	fix(10,10)	fix(10,10)
+4	1	1	joyTrainTask_phase2	fix(10,-10)	fix(10,-10)
