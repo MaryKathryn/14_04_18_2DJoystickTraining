@@ -1,0 +1,9 @@
+Condition	Frequency	Block	Timing File	TaskObject#1		
+1	1	1	joyTrainTask_phase3	fix(-9,6)
+2	1	1	joyTrainTask_phase3	fix(0,6)
+3	1	1	joyTrainTask_phase3	fix(9,6)
+4	1	1	joyTrainTask_phase3	fix(-9,0)
+5	1	1	joyTrainTask_phase3	fix(9,0)
+6	1	1	joyTrainTask_phase3	fix(-9,-6)
+7	1	1	joyTrainTask_phase3	fix(0,-6)
+8	1	1	joyTrainTask_phase3	fix(9,-6)
