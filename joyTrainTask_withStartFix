@@ -1,0 +1,56 @@
+% Joystick training task that requires joystick to start in centre 
+% Timing file
+% June 3rd 2018
+% Kathryn McIntosh 
+ 
+target = 1; %Task object 1 will be the joystick target 
+fixation_point = 2; %This will be initial center fixation point 
+ 
+%% Time intervals (in ms):
+wait_for_fix = 5000; %Subject gets 5 seconds to being joystick back to center before it's an error
+initial_fix = 100;  %Time subject must hold joystick in center for 100ms before target is displayed 
+hold_target_time = 60; %Must keep joystick in target for 60ms
+get_to_target_time = 6000; %After successful fixation gets 1 min to try and get curser into target
+ 
+%fixation window (in degrees):
+fix_radius = 3;
+targ_radius = 10;
+ 
+%% Initial fixation eventmarker 9 
+toggleobject(fixation_point, 'eventmarker', 9, 'status','on');
+ontarget = eyejoytrack('acquiretarget', fixation_point, fix_radius, wait_for_fix);
+if ~ontarget,
+    trialerror(1); %Joystick was not in center at start for any time
+    toggleobject(fixation_point)
+    return
+end
+ontarget = eyejoytrack('holdtarget', fixation_point, fix_radius, initial_fix);
+if ~ontarget,
+    trialerror(2); %Joystick was in center at start but left too soon
+    toggleobject(fixation_point)
+    return
+end
+ 
+%% Turn off center fixation point and display target eventmarker 10
+toggleobject([fixation_point target],'eventmarker', 10); %Simultaneously turns of fix point and displays target
+ 
+ontarget = eyejoytrack('acquiretarget', target, targ_radius, get_to_target_time);
+if ~ontarget,
+    trialerror(3); %Did not touch target for the whole min
+    toggleobject([target])
+    return
+end
+ 
+% hold target then reward
+ontarget = eyejoytrack('holdtarget', target, targ_radius, hold_target_time);
+if ~ontarget,
+    trialerror(4); %Touched targer but didn't hold it long enough 
+    toggleobject(target)
+    return
+end
+trialerror(0); % correct
+goodmonkey(500,'NumReward',3) % 500ms of juice x 3
+ 
+toggleobject(target); %turn off remaining objects
+ 
+
